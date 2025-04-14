@@ -88,7 +88,40 @@ select * from grupo;
 select * from horario;
 select * from tiene;
 
+/* mostrar las materias y grupos que son dictados por docente zuna*/
 
+select *
+from docente;
+select materia.sigla, materia.nombre, grupo.nombre
+from grupo,materia,docente
+where   grupo.codigo = docente.codigo and materia.sigla = grupo.sigla and docente.nombre = 'ZUNA VILLAGOMEX RICARDO';
 
+/* mostrar cuantos grupos enseña zuna villagomes*/
+
+select count(*)
+from docente, grupo
+where docente.codigo = grupo.codigo and docente.nombre = 'ZUNA VILLAGOMEX RICARDO';
+
+/* mostrar el codigo y nombre de los docentes que enseñan introduccion a la informatica*/
+
+select docente.codigo, docente.nombre
+from materia, grupo, docente
+where docente.codigo = grupo.codigo and grupo.sigla = materia.sigla
+		and materia.nombre = 'INTRODUCCION LA INFORMATICA';
+        
+/* mostrar el nombre y codigo de los docentes , que enseñan los lunes a las 7:00*/
+select docente.codigo , docente.nombre
+from docente, horario, grupo, tiene
+where docente.codigo = grupo.codigo  and grupo.id = tiene.idgrupo and  
+ tiene.idhorario = horario.id and
+ horario.dia = 'lunes' and
+ diai = '7:00';
+
+/* mostrar el horario de clases de la materia base de datos 1, del grupo SA*/
+select horario.dia , horario.diai, horario.diaf
+from horario, materia, grupo, tiene
+where materia.sigla = grupo.sigla and grupo.id = tiene.idgrupo 
+and tiene.idhorario = horario.id and materia.nombre = 'BASE DE DATOS 1' 
+and grupo.nombre = 'SA';
 
 
